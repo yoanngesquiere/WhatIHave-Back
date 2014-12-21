@@ -1,0 +1,7 @@
+web:
+  build: .
+  command: node bin/www
+  links:
+   - db
+db:
+  image: mongo
