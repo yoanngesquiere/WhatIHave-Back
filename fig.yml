@@ -3,5 +3,7 @@ web:
   command: node bin/www
   links:
    - db
+  volumes:
+   - .:/data/app
 db:
   image: mongo
