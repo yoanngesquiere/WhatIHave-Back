@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var mongo = require('mongodb');
 var monk = require('monk');
 var db = monk(process.env.WIHB_DB_1_PORT_27017_TCP_ADDR+':27017/wihb');
+var cors = require('cors');
 
 
 var routes = require('./routes/index');
@@ -25,10 +26,13 @@ app.set('view engine', 'jade');
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
+//TODO: configure CORS with a whitelist
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 // Make our db accessible to our router
 app.use(function(req,res,next){
