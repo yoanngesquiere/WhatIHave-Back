@@ -23,7 +23,7 @@ router.get('/:id', function(req, res) {
 });
 
 //New product creation
-router.put('/', function(req, res) {
+router.post('/', function(req, res) {
     var db = req.db;
     var collection = db.get('products');
     collection.insert(req.body);
