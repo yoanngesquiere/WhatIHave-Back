@@ -22,4 +22,12 @@ router.get('/:id', function(req, res) {
     });
 });
 
+//New product creation
+router.put('/', function(req, res) {
+    var db = req.db;
+    var collection = db.get('products');
+    collection.insert(req.body);
+    res.send();
+});
+
 module.exports = router;
