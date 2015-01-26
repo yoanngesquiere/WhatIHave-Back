@@ -25,9 +25,14 @@ router.get('/:id', function(req, res) {
 //New product creation
 router.post('/', function(req, res) {
     var db = req.db;
+    console.log(req.body);
     var collection = db.get('products');
-    collection.insert(req.body);
-    res.send();
+    insertedObject = null;
+    collection.insert(req.body, function(err,docsInserted){
+        console.log(docsInserted);
+        insertedObject = docsInserted;
+        res.send(insertedObject);
+    });
 });
 
 module.exports = router;
