@@ -10,9 +10,6 @@ var monk = require('monk');
 var db = monk(process.env.WIHB_DB_1_PORT_27017_TCP_ADDR+':27017/wihb');
 var cors = require('cors');
 
-
-var routes = require('./routes/index');
-var users = require('./routes/users');
 var product = require('./routes/product');
 
 var app = express();
@@ -40,8 +37,7 @@ app.use(function(req,res,next){
     next();
 });
 
-app.use('/', routes);
-app.use('/users', users);
+app.use('/', product);
 app.use('/product', product);
 
 // catch 404 and forward to error handler
