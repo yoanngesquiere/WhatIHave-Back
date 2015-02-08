@@ -13,11 +13,12 @@ router.get('/', function(req, res) {
 
 //Get a specific product
 router.get('/:id', function(req, res) {
+    console.log(req.params.id);
     var product_id = req.params.id;
     var db = req.db;
 
     var collection = db.get('products');
-    collection.find({id: parseInt(product_id)},function(e,products){
+    collection.find({_id: product_id},function(e,products){
         res.send(products);
     });
 });
@@ -25,13 +26,22 @@ router.get('/:id', function(req, res) {
 //New product creation
 router.post('/', function(req, res) {
     var db = req.db;
-    console.log(req.body);
     var collection = db.get('products');
     insertedObject = null;
     collection.insert(req.body, function(err,docsInserted){
-        console.log(docsInserted);
         insertedObject = docsInserted;
         res.send(insertedObject);
+    });
+});
+
+//Delete a product
+router.delete('/:id', function(req, res) {
+    var product_id = req.params.id;
+    var db = req.db;
+
+    var collection = db.get('products');
+    collection.remove({_id: product_id},function(e,products){
+        res.send();
     });
 });
 
